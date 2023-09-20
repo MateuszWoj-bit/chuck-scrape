@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const fs = require("fs");
 
 async function scrapeWebsite() {
   const browser = await puppeteer.launch({ headless: "new" });
@@ -22,7 +23,9 @@ async function scrapeWebsite() {
       (element) => element.textContent
     );
 
-    console.log(jokeText);
+    console.log(jokeText);  
+    fs.appendFileSync("joke.txt", `${jokeText}\n`);
+
   } catch (error) {
     console.error("Error:", error);
   } finally {
